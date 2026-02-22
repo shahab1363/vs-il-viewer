@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.vsidx
+*.lock
+TestResults/
+
+# Build outputs
+*.vsix
+packages/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Development notes
+docs/handoff/*.md
+
+# Claude/Serena
+.claude/
+.serena/

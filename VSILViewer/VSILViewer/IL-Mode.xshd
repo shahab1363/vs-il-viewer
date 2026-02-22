@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="IL" extensions=".il" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <!-- Color definitions for IL/MSIL -->
+  <Color name="Comment" foreground="#57A64A" />
+  <Color name="String" foreground="#D69D85" />
+  <Color name="Directive" foreground="#9B9B9B" />
+  <Color name="Instruction" foreground="#569CD6" />
+  <Color name="Label" foreground="#DCDCAA" />
+  <Color name="NumberLiteral" foreground="#B5CEA8" />
+  <Color name="TypeReference" foreground="#4EC9B0" />
+
+  <RuleSet ignoreCase="false">
+    <!-- Comments -->
+    <Span color="Comment">
+      <Begin>//</Begin>
+    </Span>
+    <Span color="Comment" multiline="true">
+      <Begin>/\*</Begin>
+      <End>\*/</End>
+    </Span>
+
+    <!-- Directives -->
+    <Span color="Directive">
+      <Begin>\.</Begin>
+    </Span>
+
+    <!-- Strings -->
+    <Span color="String">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+
+    <!-- Numbers -->
+    <Rule color="NumberLiteral">
+      \b0[xX][0-9a-fA-F]+|(\b\d+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?
+    </Rule>
+
+    <!-- IL Instructions -->
+    <Keywords color="Instruction">
+      <Word>nop</Word>
+      <Word>break</Word>
+      <Word>ldarg</Word>
+      <Word>ldarga</Word>
+      <Word>starg</Word>
+      <Word>ldloc</Word>
+      <Word>ldloca</Word>
+      <Word>stloc</Word>
+      <Word>ldnull</Word>
+      <Word>ldc</Word>
+      <Word>dup</Word>
+      <Word>pop</Word>
+      <Word>call</Word>
+      <Word>calli</Word>
+      <Word>callvirt</Word>
+      <Word>ret</Word>
+      <Word>br</Word>
+      <Word>brfalse</Word>
+      <Word>brtrue</Word>
+      <Word>beq</Word>
+      <Word>bge</Word>
+      <Word>bgt</Word>
+      <Word>ble</Word>
+      <Word>blt</Word>
+      <Word>bne</Word>
+      <Word>switch</Word>
+      <Word>ldind</Word>
+      <Word>stind</Word>
+      <Word>add</Word>
+      <Word>sub</Word>
+      <Word>mul</Word>
+      <Word>div</Word>
+      <Word>rem</Word>
+      <Word>and</Word>
+      <Word>or</Word>
+      <Word>xor</Word>
+      <Word>shl</Word>
+      <Word>shr</Word>
+      <Word>neg</Word>
+      <Word>not</Word>
+      <Word>conv</Word>
+      <Word>castclass</Word>
+      <Word>isinst</Word>
+      <Word>box</Word>
+      <Word>unbox</Word>
+      <Word>throw</Word>
+      <Word>ldfld</Word>
+      <Word>ldflda</Word>
+      <Word>stfld</Word>
+      <Word>ldsfld</Word>
+      <Word>ldsflda</Word>
+      <Word>stsfld</Word>
+      <Word>stobj</Word>
+      <Word>newobj</Word>
+      <Word>newarr</Word>
+      <Word>ldlen</Word>
+      <Word>ldelema</Word>
+      <Word>ldelem</Word>
+      <Word>stelem</Word>
+      <Word>leave</Word>
+      <Word>endfinally</Word>
+      <Word>endfilter</Word>
+      <Word>initobj</Word>
+      <Word>ldtoken</Word>
+      <Word>ceq</Word>
+      <Word>cgt</Word>
+      <Word>clt</Word>
+    </Keywords>
+
+    <!-- Labels (IL_xxxx:) -->
+    <Rule color="Label">
+      IL_[0-9a-fA-F]+:
+    </Rule>
+
+    <!-- Type references -->
+    <Rule color="TypeReference">
+      \[[\w\.]+\][\w\.]+
+    </Rule>
+  </RuleSet>
+</SyntaxDefinition>
