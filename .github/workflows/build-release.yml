@@ -22,7 +22,9 @@ jobs:
         uses: nuget/setup-nuget@v2
 
       - name: Restore packages
-        run: nuget restore VSILViewer\VSILViewer.sln
+        run: |
+          nuget restore VSILViewer\VSILViewer.sln
+          msbuild VSILViewer\VSILViewer\VSILViewer.csproj /t:Restore /verbosity:minimal
 
       - name: Build (Debug)
         if: "!startsWith(github.ref, 'refs/tags/v')"
@@ -37,14 +39,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VSILViewer-Debug
-          path: VSILViewer\VSILViewer\bin\Debug\VSILViewer.vsix
+          path: VSILViewer/VSILViewer/bin/Debug/VSILViewer.vsix
 
       - name: Upload VSIX artifact (Release)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v4
         with:
           name: VSILViewer-Release
-          path: VSILViewer\VSILViewer\bin\Release\VSILViewer.vsix
+          path: VSILViewer/VSILViewer/bin/Release/VSILViewer.vsix
 
   release:
     needs: build
@@ -64,7 +66,9 @@ jobs:
         uses: nuget/setup-nuget@v2
 
       - name: Restore packages
-        run: nuget restore VSILViewer\VSILViewer.sln
+        run: |
+          nuget restore VSILViewer\VSILViewer.sln
+          msbuild VSILViewer\VSILViewer\VSILViewer.csproj /t:Restore /verbosity:minimal
 
       - name: Build Release
         run: msbuild VSILViewer\VSILViewer\VSILViewer.csproj /t:Build /p:Configuration=Release /verbosity:minimal
@@ -72,5 +76,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: VSILViewer\VSILViewer\bin\Release\VSILViewer.vsix
+          files: VSILViewer/VSILViewer/bin/Release/VSILViewer.vsix
           generate_release_notes: true
